@@ -6,10 +6,12 @@ import java.io.FileNotFoundException;
 
 /**
  * Данный пример демонстрирует проверяемое исключение и прокидывание его дальше.
+ *
+ * 1 - обратите внимание, что пример описан в методе main
  */
 public class CheckedExceptionExample2 {
     public static void main(String[] args) throws FileNotFoundException {
-        checkedExceptionWithThrows();
+        checkedExceptionWithThrows(); // 1
     }
 
     private static void checkedExceptionWithThrows() throws FileNotFoundException {

@@ -6,11 +6,13 @@ import java.io.FileNotFoundException;
 
 /**
  * Данный пример демонстрирует проверяемое исключение и необходимость его обработки.
+ * <p>
+ * 1 - обратите внимание, что пример описан в методе main
  */
 public class CheckedExceptionExample1 {
     public static void main(String[] args) {
         try {
-            checkedExceptionWithThrows();
+            checkedExceptionWithThrows(); // 1
         } catch (FileNotFoundException e) {
             // необходимо обработать исключение или оставить так (bad practice)
         }
