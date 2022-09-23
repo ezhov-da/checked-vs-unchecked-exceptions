@@ -8,16 +8,17 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * Поступила задача на создание приложения, которое читает заданный файл формата CSV.
- * И выводит информацию из него в консоль в формате JSON.
- * <p>
- * Решаем задачу в лоб.
- * <p>
  * На что стоит обратить внимание и какие "скрытые" проблемы присутствуют в коде?
  */
 public class Application2 {
-    public static void main(String[] args) throws IOException { // 6 проброс ошибки до пользователя
-        File file = new File("employees.csv"); // 5 стоит обратить внимание, что здесь явно прослеживаются уровни приложения
+    public static void main(String[] args) throws IOException { // проброс ошибки до пользователя
+        String fileName;
+        if (args.length == 1) {
+            fileName = args[0];
+        } else {
+            fileName = "employees.csv";
+        }
+        File file = new File(fileName); //отсутствие проверки наличия файла
 
         List<Employee> employees = getEmployees(file);
         String employeesAsJson = toJson(employees);
@@ -29,7 +30,7 @@ public class Application2 {
         List<String> lines = Files.readAllLines(file.toPath(), StandardCharsets.UTF_8);
         return lines.stream()
                 .map(l -> {
-                            String[] values = l.split(";"); // 1 чтение файла CSV без учёта разделителей
+                            String[] values = l.split(","); // чтение файла CSV без учёта экранирования разделителей
                             return new Employee(values[0], Integer.valueOf(values[1])); // 2 отсутствует проверка на наличие данных
                         }
                 )
@@ -41,7 +42,7 @@ public class Application2 {
         builder.append("[");
         String employeesAsString = employees
                 .stream()
-                .map(e -> String.format("{\"name\":\"%s\",\"age\":\"%s\"}", e.getName(), e.getAge())) // 3 формирование JSON без учёта экранирования данных
+                .map(e -> String.format("{\"name\":\"%s\",\"age\":\"%s\"}", e.getName(), e.getAge())) // формирование JSON без учёта экранирования данных
                 .collect(Collectors.joining(","));
         builder.append(employeesAsString);
         builder.append("]");
@@ -52,7 +53,7 @@ public class Application2 {
         private String name;
         private int age;
 
-        public Employee(String name, int age) { // 4 нет понимания валидации данных. Возраст меньше 0? Имя пустое?
+        public Employee(String name, int age) { // нет понимания валидации данных. Возраст меньше 0? Имя пустое?
             this.name = name;
             this.age = age;
         }
