@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2022-09-30T11:36:51.253590300Z</date>
+  <millis>1664537811253</millis>
+  <nanos>590300</nanos>
+  <sequence>0</sequence>
+  <logger>ru.ezhov.checkedvsuncheckedexceptions.application.iterations.i1.Application10</logger>
+  <level>SEVERE</level>
+  <class>ru.ezhov.checkedvsuncheckedexceptions.application.iterations.i1.Application18</class>
+  <method>main</method>
+  <thread>1</thread>
+  <message>Error when get employees</message>
+  <exception>
+    <message>ru.ezhov.checkedvsuncheckedexceptions.application.iterations.i1.GetEmployeesApplication18Exception: Age of employee 'Eric Evans' should not be less than '0' but now '-1'</message>
+    <frame>
+      <class>ru.ezhov.checkedvsuncheckedexceptions.application.iterations.i1.Application18</class>
+      <method>getEmployees</method>
+      <line>57</line>
+    </frame>
+    <frame>
+      <class>ru.ezhov.checkedvsuncheckedexceptions.application.iterations.i1.Application18</class>
+      <method>main</method>
+      <line>34</line>
+    </frame>
+    <frame>
+      <class>ru.ezhov.checkedvsuncheckedexceptions.application.iterations.i1.Application19</class>
+      <method>main</method>
+      <line>22</line>
+    </frame>
+  </exception>
+</record>
+</log>
