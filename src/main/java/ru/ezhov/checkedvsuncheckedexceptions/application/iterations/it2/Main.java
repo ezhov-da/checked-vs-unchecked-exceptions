@@ -1,4 +1,4 @@
-package ru.ezhov.checkedvsuncheckedexceptions.application;
+package ru.ezhov.checkedvsuncheckedexceptions.application.iterations.it2;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

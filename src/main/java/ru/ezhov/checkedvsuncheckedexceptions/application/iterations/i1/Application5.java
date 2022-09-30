@@ -20,6 +20,7 @@ public class Application5 {
      * 3. При формировании JSON появилось новое исключение JsonProcessingException, о котором ранее ни кто не знал
      * 4. Но в целом мы молодцы - можем гордиться своей работой!
      *
+     * @see Application6
      */
 }
 

@@ -16,6 +16,8 @@ import java.util.stream.Collectors;
  * Решаем задачу в лоб.
  * <p>
  * На что стоит обратить внимание и какие "скрытые" проблемы присутствуют в коде?
+ *
+ * @see Application2
  */
 public class Application1 {
     public static void main(String[] args) throws IOException {

@@ -12,8 +12,17 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * Прошло какое-то время, ошибки время от времени появлялись и бизнес пришёл с просьбой, чтоб скрыть огромные "полотна" ошибок из вида.
+ * Прошло какое-то время, ошибки время от времени появлялись и бизнес пришёл с просьбой,
+ * чтоб скрыть огромные "полотна" ошибок из вида.
  * Оставив только понятные человеку сообщения.
+ *
+ * Давайте попробуем это сделать.
+ *
+ * 1. Сначала нужно избавиться от исключения в методе main, которое мы пробрасываем
+ * 2. Отловить исключения из наших методов
+ * 3. Попробуем описать причины возникновения понятными сообщениями
+ *
+ * @see Application7
  */
 public class Application6 {
     public static void main(String[] args) throws IOException { // проброс ошибки до пользователя
@@ -43,7 +52,7 @@ public class Application6 {
                                 try {
                                     age = Integer.valueOf(row[1]);
                                 } catch (NumberFormatException ex) {
-                                    throw new IllegalArgumentException("Age must be a number. Incorrect value '" + row[1] + "'"); // так же добавлена проверка на возрастт
+                                    throw new IllegalArgumentException("Age must be a number. Incorrect value '" + row[1] + "'"); // так же добавлена проверка на возраст
                                 }
                                 return new Employee(row[0], age);
                             } else {

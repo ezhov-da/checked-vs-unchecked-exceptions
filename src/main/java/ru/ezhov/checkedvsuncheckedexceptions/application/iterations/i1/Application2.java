@@ -9,6 +9,8 @@ import java.util.stream.Collectors;
 
 /**
  * На что стоит обратить внимание и какие "скрытые" проблемы присутствуют в коде?
+ *
+ * @see Application3
  */
 public class Application2 {
     public static void main(String[] args) throws IOException { // проброс ошибки до пользователя

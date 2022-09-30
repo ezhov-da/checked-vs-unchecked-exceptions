@@ -12,32 +12,12 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * Что мы имеем на данный момент:
- * 1. Ошибка об отсутствии файла нечитаема для пользователя и предполагает обращение к разработке по "декодированию" сообщения
- * 2. Ошибка о некорректном формате вообще непонятна для пользователя и предполагает точное обращение к разработке
- * 3. Ошибка о выходе за пределы диапазона так же непонятна для пользователя и предполагает точное обращение к разработке
- * 4. Формирование некорректного JSON нарушает постановку задачи
- * <p>
- * Что следует сделать?
- * 1. Есть два варианта:
- * - 1. Проверка наличия файла на этапе проверки входных параметров
- * - 2. Проверка файла перед попыткой его чтения
- * <p>
- * 2. Некорректный парсинг CSV можно победить используя специализированную библиотеку
- * 3. Проверка отсутствия необходимых данных
- * 4. Предоставить формирование JSON специализированной библиотеке
- * <p>
- * Давайте попробуем.
- * <p>
- * 1. Учитывая то, что проверка файла на его наличие относится к обязанностям метода чтения, расположим проверку в методе чтения данных.
- * 2. Подключим библиотеку парсинга данных
- * 3. Добавим проверку наличия данных в нужном формате
- * 4. Подключим формирование JSON библиотекой
- *
- * @see Application5
+ * 1. Сначала нужно избавиться от исключения в методе main, которое мы пробрасываем
+ * 2. Отловить исключения из наших методов
+ * 3. Попробуем описать причины возникновения понятными сообщениями
  */
-public class Application4 {
-    public static void main(String[] args) throws IOException { // проброс ошибки до пользователя
+public class Application7 {
+    public static void main(String[] args) { // проброс ошибки до пользователя
         String fileName;
         if (args.length == 1) {
             fileName = args[0];
@@ -46,10 +26,26 @@ public class Application4 {
         }
         File file = new File(fileName);
 
-        List<Employee> employees = getEmployees(file);
-        String employeesAsJson = toJson(employees);
-
-        System.out.println(employeesAsJson);
+        try {
+            List<Employee> employees = getEmployees(file);
+            String employeesAsJson = toJson(employees);
+            System.out.println(employeesAsJson);
+        } catch (IOException e) {
+            /**
+             * видно, что теперь ошибка стала понятна для пользователя
+             */
+            System.out.println("Error when get employees from source or create json");
+        } catch (Exception ex) {
+            /**
+             * а здесь, мы ставим хак, который не позволит приложению крашиться, мы ведь помним про наши "ружья на стене"
+             * в виде непроверяемых исключений?
+             *
+             * Как думаете, насколько теперь понятно сообщение?
+             * Давайте проверим!
+             * @see Application8
+             */
+            System.out.println("Unexpected error");
+        }
     }
 
     private static List<Employee> getEmployees(File file) throws IOException {
@@ -64,7 +60,7 @@ public class Application4 {
                                 try {
                                     age = Integer.valueOf(row[1]);
                                 } catch (NumberFormatException ex) {
-                                    throw new IllegalArgumentException("Age must be a number. Incorrect value '" + row[1] + "'"); // так же добавлена проверка на возрастт
+                                    throw new IllegalArgumentException("Age must be a number. Incorrect value '" + row[1] + "'"); // так же добавлена проверка на возраст
                                 }
                                 return new Employee(row[0], age);
                             } else {
